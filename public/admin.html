@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>لوحة السكرتيرة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="card wide">
+    <h1>📋 لوحة السكرتيرة</h1>
+    <p class="muted">الحجوزات تتحدّث تلقائيًا كل 15 ثانية. <span id="lastUpdate"></span></p>
+
+    <div class="toolbar">
+      <label>فلترة بالتاريخ: <input type="date" id="dateFilter"></label>
+      <button id="todayBtn">اليوم</button>
+      <button id="clearBtn">كل الحجوزات</button>
+      <label><input type="checkbox" id="hideCancelled" checked> إخفاء الملغاة</label>
+      <span class="muted" id="count"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>الاسم</th><th>الجوال</th><th>التاريخ</th><th>الوقت</th><th>الحالة</th><th>وقت إنشاء الحجز</th><th></th></tr>
+        </thead>
+        <tbody id="rows"><tr><td colspan="8">جاري التحميل...</td></tr></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

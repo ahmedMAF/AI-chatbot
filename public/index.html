@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>عيادة الشفاء التجريبية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="card">
+    <header class="clinic">
+      <div class="logo">🩺</div>
+      <h1 id="clinicName">عيادة الشفاء التجريبية</h1>
+      <p class="muted" id="clinicDoctor"></p>
+      <ul class="facts">
+        <li>🕘 <span id="clinicHours"></span></li>
+        <li>💳 الكشفية: <span id="clinicPrice"></span></li>
+        <li>📅 اليوم: <span id="clinicToday"></span></li>
+      </ul>
+    </header>
+
+    <section class="call">
+      <div id="status" class="status idle"><span class="dot"></span><span id="statusText">جاهز للاتصال</span></div>
+      <div class="buttons">
+        <button id="callBtn" class="btn call-btn">📞 اتصل بالعيادة</button>
+        <button id="endBtn" class="btn end-btn" disabled>إنهاء المكالمة</button>
+      </div>
+      <p class="hint">سيطلب المتصفح إذن استخدام المايكروفون. تحدّث بشكل طبيعي مع سارة، سكرتيرة العيادة.</p>
+    </section>
+
+    <section class="transcript-wrap">
+      <h2>نص المكالمة</h2>
+      <div id="transcript" class="transcript"><p class="empty">سيظهر نص المحادثة هنا أثناء المكالمة.</p></div>
+    </section>
+
+    <p class="emergency">🚑 في الحالات الطارئة اتصل بالإسعاف فورًا على <b>101</b></p>
+  </main>
+
+  <script src="/vendor/elevenlabs-client.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "clinic-voice-secretary",
+  "version": "1.0.0",
+  "description": "AI voice secretary prototype for a clinic (ElevenLabs Agents)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedMAF/AI-chatbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmedMAF/AI-chatbot/issues"
+  },
+  "homepage": "https://github.com/ahmedMAF/AI-chatbot#readme",
+  "dependencies": {
+    "@elevenlabs/client": "^1.38.0",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
+  },
+  "private": true
+}
