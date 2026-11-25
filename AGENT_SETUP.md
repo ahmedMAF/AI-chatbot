@@ -148,7 +148,7 @@
 
 - في تبويب **Security** فعّل **Enable authentication**، حتى لا يمكن الاتصال بالـ Agent إلا عبر Signed URL من السيرفر.
 - لا داعي لتفعيل Overrides؛ الكود يرسل فقط `dynamicVariables`.
-- أنشئ API Key من **Settings → API Keys** وضعه في `.env` تحت `ELEVENLABS_API_KEY`. يكفي أن تكون صلاحيته تشمل ElevenLabs Agents.
+- أنشئ API Key من **Settings → API Keys** وضعه في `.env` تحت `ELEVENLABS_API_KEY`. لازم تكون صلاحية **ElevenAgents / Conversational AI** على **Write** (وليس Read أو No access)، لأن طلب الـ signed URL يحتاج الصلاحية `convai_write`، وإلا ستظهر رسالة الخطأ `missing the permission convai_write`.
 
 ---
 
