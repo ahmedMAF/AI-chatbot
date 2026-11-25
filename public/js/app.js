@@ -49,26 +49,30 @@
     try {
       const r = await fetch(url, options);
       const data = await r.json();
+      // نعرض رد النظام في النص للتشخيص
+      addMessage('system', `${data.ok ? '✅' : '⚠️'} النظام: ${data.message || JSON.stringify(data)}`);
       return JSON.stringify(data);
     } catch (e) {
+      console.error('Tool API error:', e);
+      addMessage('system', `❌ تعذّر الوصول للسيرفر: ${e.message}`);
       return JSON.stringify({ ok: false, message: 'تعذّر الوصول لنظام المواعيد، اعتذر من المريض واطلب منه المحاولة لاحقًا' });
     }
   }
 
   const clientTools = {
     get_available_slots: async ({ date }) => {
+      console.log('[tool] get_available_slots', { date });
       addMessage('system', `🔎 فحص المواعيد ليوم ${date}`);
       return callApi(`/api/slots?date=${encodeURIComponent(date || '')}`);
     },
     book_appointment: async ({ name, phone, date, time }) => {
+      console.log('[tool] book_appointment', { name, phone, date, time });
       addMessage('system', `📝 محاولة حجز ${date} الساعة ${time}`);
-      const result = await callApi('/api/appointments', {
+      return callApi('/api/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone, date, time }),
       });
-      try { addMessage('system', JSON.parse(result).ok ? '✅ تم الحجز' : '⚠️ لم يتم الحجز'); } catch {}
-      return result;
     },
   };
 
@@ -95,6 +99,11 @@
           if (message) addMessage(who, message);
         },
         onModeChange: ({ mode }) => setStatus(mode === 'speaking' ? 'speaking' : 'listening'),
+        // إذا طلب الـ Agent أداة باسم غير معرّف هنا (اسم مختلف في لوحة ElevenLabs)
+        onUnhandledClientToolCall: (call) => {
+          console.warn('Unhandled client tool:', call);
+          addMessage('system', `❌ الـ Agent طلب أداة غير معرّفة: "${call && call.tool_name}" — لازم الاسم يطابق get_available_slots أو book_appointment`);
+        },
         onError: (msg) => { console.error(msg); setStatus('error', `خطأ: ${msg}`); },
       });
     } catch (e) {

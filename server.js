@@ -9,6 +9,15 @@ const pageRoutes = require('./src/routes/pages');
 const app = express();
 app.use(express.json({ limit: '10kb' }));
 
+// سجل مختصر لطلبات الـ API في الطرفية (للتشخيص)
+app.use('/api', (req, res, next) => {
+  res.on('finish', () => {
+    const body = req.method === 'POST' ? ` ${JSON.stringify(req.body)}` : '';
+    console.log(`[api] ${req.method} ${req.originalUrl} → ${res.statusCode}${body}`);
+  });
+  next();
+});
+
 // مكتبة ElevenLabs للمتصفح (نسخة IIFE من الحزمة @elevenlabs/client)
 app.get('/vendor/elevenlabs-client.js', (req, res) =>
   res.sendFile(path.join(__dirname, 'node_modules/@elevenlabs/client/dist/lib.iife.js')));
